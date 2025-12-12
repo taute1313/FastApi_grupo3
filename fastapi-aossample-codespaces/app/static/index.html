@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Seguridad</title>
+    <style>
+        /* --- TUS ESTILOS ORIGINALES --- */
+        :root {
+          --primary: #6366f1;
+          --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+          --card-bg: rgba(255, 255, 255, 0.05);
+          --input-bg: rgba(0, 0, 0, 0.3);
+          --text-main: #f8fafc;
+          --danger: #ef4444;
+          --success: #10b981;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body {
+          background: var(--bg-gradient);
+          color: var(--text-main);
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+    
+        .container { width: 100%; max-width: 500px; }
+    
+        /* --- IMPORTANTE: ESTO OCULTABA TU PANTALLA --- */
+        .screen { display: none; animation: fadeIn 0.5s ease; }
+        .screen.active { display: block; } /* Esta clase hace visible la pantalla */
+    
+        .glass-card {
+          background: var(--card-bg);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255,255,255,0.1);
+          padding: 30px;
+          border-radius: 20px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+          transition: transform 0.3s ease;
+        }
+    
+        h1, h2 { text-align: center; margin-bottom: 20px; font-weight: 600; }
+        
+        .input-group { margin-bottom: 15px; }
+        
+        input, select, textarea, button {
+          width: 100%;
+          padding: 14px;
+          border-radius: 10px;
+          border: 1px solid rgba(255,255,255,0.1);
+          background: var(--input-bg);
+          color: white;
+          margin-top: 5px;
+          transition: 0.3s;
+        }
+    
+        input:focus, textarea:focus { outline: none; border-color: var(--primary); background: rgba(0,0,0,0.5); }
+    
+        button.btn-primary {
+          background: var(--primary);
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+        button.btn-primary:hover { filter: brightness(1.2); transform: translateY(-2px); }
+        button.btn-primary:active { transform: translateY(0); }
+    
+        .btn-link {
+          background: none; border: none; color: #a5b4fc; 
+          cursor: pointer; text-decoration: underline; margin-top: 10px; font-size: 0.9rem;
+        }
+
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn-logout { width: auto; background: var(--danger); padding: 8px 15px; font-size: 0.8rem; cursor: pointer; border: none; border-radius: 5px; color: white;}
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="login-screen" class="screen active">
+        <div class="glass-card">
+            <h1>Iniciar Sesión</h1>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Usuario" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <button class="btn-primary" onclick="login()">Entrar</button>
+            <button class="btn-link">¿Olvidaste tu contraseña?</button>
+        </div>
+    </div>
+
+    <div id="tasks-screen" class="screen">
